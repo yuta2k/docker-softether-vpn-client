@@ -1,7 +1,4 @@
-# Lightweight [Softether VPN][softether] Client
-[![Build Status][project-build-image]][project-build-link] [![Docker Build][docker-build-image]][docker-build-link] [![Docker Stars][docker-stars-image]][docker-stars-link] [![Docker Pulls][docker-pulls-image]][docker-pulls-link]
-
-[![MicroBadger Version][micro-version-image]][micro-version-links] [![MicroBadger Size][micro-size-image]][micro-size-link]
+# Lightweight Softether VPN Client
 
 This docker only contains a working **SoftEther VPN Client** other components have been removed.
 
@@ -40,42 +37,3 @@ docker run -d -v /host/path/vpnclient:/usr/vpnclient:Z amary/softether-vpn-clien
 ```
 Add/delete any ```-p $PORT:$PORT/{tcp,udp} depending on you will ```
 
-# Changelog
-* v4.22-9634-beta : Initial Release
-* v4.22-9634-beta.patch1 : Update Alpine to 3.6, Improve Dockerfile, Secure Entrypoint
-
-[//]: <> (==== Reference Part ====)
-
-[//]: <> (External Websites)
-[softether]: https://www.softether.org/
-[softether-download]: http://www.softether-download.com/en.aspx?product=softether
-[softether-repository]: https://github.com/SoftEtherVPN/SoftEtherVPN
-
-[bridge-link]: https://hub.docker.com/r/amary/softether-vpn-bridge/
-[cmd-link]: https://hub.docker.com/r/amary/softether-vpn-cmd/
-[server-link]: https://hub.docker.com/r/amary/softether-vpn-server/
-
-[alpine-link]: https://hub.docker.com/_/alpine/
-
-[//]: <> (Repository Link)
-[server-patch]: https://github.com/AntoineMary/docker-softether-vpn-bridge/blob/master/assets/patchs/00_Server.sh
-[openvpn-patch]: https://github.com/AntoineMary/docker-softether-vpn-bridge/blob/master/assets/patchs/01_OpenVPN.sh
-
-[//]: <> (Badges)
-[project-build-image]: https://travis-ci.org/AntoineMary/docker-softether-vpn-client.svg?branch=master
-[project-build-link]: https://travis-ci.org/AntoineMary/docker-softether-vpn-client
-
-[docker-build-image]: https://img.shields.io/docker/automated/amary/softether-vpn-client.svg
-[docker-build-link]: https://hub.docker.com/r/amary/softether-vpn-client/
-
-[docker-stars-image]: https://img.shields.io/docker/stars/amary/softether-vpn-client.svg
-[docker-stars-link]: https://hub.docker.com/r/amary/softether-vpn-client/
-
-[docker-pulls-image]: https://img.shields.io/docker/pulls/amary/softether-vpn-client.svg
-[docker-pulls-link]: https://hub.docker.com/r/amary/softether-vpn-client/
-
-[micro-size-image]:https://images.microbadger.com/badges/image/amary/softether-vpn-client.svg
-[micro-size-link]: https://microbadger.com/images/amary/softether-vpn-client
-
-[micro-version-image]: https://images.microbadger.com/badges/version/amary/softether-vpn-client.svg
-[micro-version-links]: https://microbadger.com/images/amary/softether-vpn-client
