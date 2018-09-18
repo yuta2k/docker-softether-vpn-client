@@ -20,14 +20,25 @@ RUN set -ex ; \
 
 FROM alpine:3.8
 
+# Adjust at runtime
+#ENV SE_SERVER
+#ENV SE_HUB
+#ENV SE_USERNAME
+#ENV SE_PASSWORD
+
+# Default values
+ENV SE_ACCOUNT_NAME=default
+ENV SE_TYPE=standard
+ENV SE_NICNAME=vpn
+
 COPY assets/entrypoint.sh /entrypoint.sh
-COPY assets/vpnclient_started.sh /vpnclient_started.sh
+COPY assets/vpnclient_config.sh /vpnclient_config.sh
 COPY assets/supervisord.conf /etc/
 
 RUN set -ex ; \
     apk --update --no-cache add \
       libcap libcrypto1.0 libssl1.0 ncurses-libs readline supervisor ; \
-    chmod +x /entrypoint.sh /vpnclient_started.sh
+    chmod +x /entrypoint.sh /vpnclient_config.sh
 
 COPY --from=builder /usr/vpnclient /usr/vpnclient
 COPY --from=builder /usr/bin/vpnclient /usr/bin/vpnclient
@@ -36,4 +47,3 @@ COPY --from=builder /usr/bin/vpncmd /usr/bin/vpncmd
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
-
