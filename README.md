@@ -5,7 +5,7 @@ TODO: rewrite
 ## Build
 
 ```shell
-docker build -t nefarius/docker-mdwiki https://github.com/nefarius/docker-softether-vpn-client.git#master
+docker build -t nefarius/docker-softether-vpn-client https://github.com/nefarius/docker-softether-vpn-client.git#master
 ```
 
 ## Run
