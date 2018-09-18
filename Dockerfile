@@ -21,12 +21,13 @@ RUN set -ex ; \
 FROM alpine:3.8
 
 COPY assets/entrypoint.sh /entrypoint.sh
+COPY assets/vpnclient_started.sh /vpnclient_started.sh
+COPY assets/supervisord.conf /etc/
 
 RUN set -ex ; \
-    addgroup -S softether ; adduser -D -H softether -g 'softether' -G softether -s /bin/sh ; \
     apk --update --no-cache add \
-      libcap libcrypto1.0 libssl1.0 ncurses-libs readline su-exec ; \
-    chmod +x /entrypoint.sh
+      libcap libcrypto1.0 libssl1.0 ncurses-libs readline supervisor ; \
+    chmod +x /entrypoint.sh /vpnclient_started.sh
 
 COPY --from=builder /usr/vpnclient /usr/vpnclient
 COPY --from=builder /usr/bin/vpnclient /usr/bin/vpnclient
@@ -34,5 +35,5 @@ COPY --from=builder /usr/vpncmd /usr/vpncmd
 COPY --from=builder /usr/bin/vpncmd /usr/bin/vpncmd
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/usr/bin/vpnclient", "execsvc"]
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
 
