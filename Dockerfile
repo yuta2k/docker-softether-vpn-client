@@ -13,21 +13,21 @@ RUN set -ex ; \
       gcc g++ make musl-dev ncurses-dev openssl-dev readline-dev cmake git ; \
     mv /assets/entrypoint.sh / && chmod +x /entrypoint.sh && \
     # Fetch sources
-    git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git ; \
-    cd SoftEtherVPN ; \
+    git clone https://github.com/SoftEtherVPN/SoftEtherVPN_Stable.git ; \
+    cd SoftEtherVPN_Stable ; \
     git submodule init && git submodule update ; \
     # Compile and Install
     ./configure ; \
-    make -C tmp ; make -C tmp install ; make -C tmp clean ; \
+    make ; make install ; make clean ; \
     # Cleanning
     apk del .build-deps ; \
     # Reintroduce necessary libraries
     apk add --no-cache --virtual .run-deps \
       libcap libcrypto1.0 libssl1.0 ncurses-libs readline su-exec ; \
-    # Removing vpnbridge, vpncmd vpnserver and build files
-    cd .. ; rm -rf /usr/local/libexec/softether/vpnserver /usr/local/bin/vpnserver \
-      /usr/local/libexec/softether/vpnbridge /usr/local/bin/vpnbridge \
-      /assets SoftEtherVPN ;
+    # Removing vpnbridge, vpnserver and build files
+    cd .. ; rm -rf /usr/vpnserver /usr/bin/vpnserver \
+      /usr/vpnbridge /usr/bin/vpnbridge \
+      /assets SoftEtherVPN_Stable ;
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/usr/local/bin/vpnclient", "execsvc"]
+CMD ["/usr/bin/vpnclient", "execsvc"]
