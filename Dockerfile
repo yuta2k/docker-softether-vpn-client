@@ -34,11 +34,12 @@ ENV SE_NICNAME=vpn
 COPY assets/entrypoint.sh /entrypoint.sh
 COPY assets/vpnclient_config.sh /vpnclient_config.sh
 COPY assets/supervisord.conf /etc/
+COPY assets/dhclient-enter-hooks /etc/dhclient-enter-hooks
 
 RUN set -ex ; \
     apk --update --no-cache add \
-      libcap libcrypto1.0 libssl1.0 ncurses-libs readline supervisor ; \
-    chmod +x /entrypoint.sh /vpnclient_config.sh
+      libcap libcrypto1.0 libssl1.0 ncurses-libs readline supervisor dhclient ; \
+    chmod +x /entrypoint.sh /vpnclient_config.sh /etc/dhclient-enter-hooks
 
 COPY --from=builder /usr/vpnclient /usr/vpnclient
 COPY --from=builder /usr/bin/vpnclient /usr/bin/vpnclient
@@ -47,3 +48,4 @@ COPY --from=builder /usr/bin/vpncmd /usr/bin/vpncmd
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+
