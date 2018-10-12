@@ -1,12 +1,8 @@
 # Lightweight Softether VPN Client
 
-TODO: rewrite
+## About
 
-## Build
-
-```shell
-docker build -t nefarius/docker-softether-vpn-client https://github.com/nefarius/docker-softether-vpn-client.git#master
-```
+This image provides a [SoftEther VPN client](https://www.softether.org/) meant to be run within an existing stack and provide access to a remove SoftEther VPN server. It currently supports connecting to a pre-defined location with user/password credentials and auto-connect to that site on startup.
 
 ## Run
 
@@ -20,7 +16,7 @@ docker run --name=docker-softether-vpn-client \
     -e SE_HUB=TheHub \
     -e SE_USERNAME=vpnuser \
     -e SE_PASSWORD=Sup3rS3cr3t \
-    -d nefarius/docker-softether-vpn-client:latest
+    -d containinger/docker-softether-vpn-client:latest
 ```
 
 ### Compose file
@@ -30,7 +26,7 @@ version: "3"
 
 services:
   vpnclient:
-    image: nefarius/docker-softether-vpn-client:latest
+    image: containinger/docker-softether-vpn-client:latest
     container_name: docker-softether-vpn-client
     privileged: true
     cap_add:
@@ -46,14 +42,14 @@ services:
 
 ## Example stack
 
-This example stack spins up an [Apache Guacamole](https://github.com/oznu/docker-guacamole) (HTML5 RDP/VNC/... client) instance and connects to a defined VPN. Only the Guacamole web interface has to be exposed to the outside world, every resource reachable within the VPN will only be accessible from within the app and the VPN container, no interface exposed on the host system. 
+This example stack spins up an [Apache Guacamole](https://github.com/oznu/docker-guacamole) (HTML5 RDP/VNC/... client) instance and connects to a defined VPN. Only the Guacamole web interface has to be exposed to the outside world, every resource reachable within the VPN will only be accessible from within the app and the VPN container, no interface exposed on the host system.
 
 ```docker-compose
 version: "3"
 
 services:
   vpnclient:
-    image: nefarius/docker-softether-vpn-client:latest
+    image: containinger/docker-softether-vpn-client:latest
     container_name: guacamole-vpn
     privileged: true
     cap_add:
@@ -64,8 +60,8 @@ services:
       - SE_USERNAME=vpnuser
       - SE_PASSWORD=Sup3rS3cr3t
     restart: always
-	# important: this container owns the network stack 
-	#            so expose guacamole ports here
+	  # important: this container owns the network stack 
+	  #            so expose guacamole ports here
     ports:
       - "8080:8080"
 
@@ -79,8 +75,8 @@ services:
       - NET_ADMIN
     depends_on:
       - vpnclient
-	# use network stack of vpnclient to gain access to
-	# the VPN network
+	  # use network stack of vpnclient to gain access to
+	  # the VPN network
     network_mode: "service:vpnclient"
 
 ```
