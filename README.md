@@ -2,7 +2,7 @@
 
 ## About
 
-This image provides a [SoftEther VPN client](https://www.softether.org/) meant to be run within an existing stack and provide access to a remove SoftEther VPN server. It currently supports connecting to a pre-defined location with user/password credentials and auto-connect to that site on startup.
+This image provides a [SoftEther VPN client](https://www.softether.org/) meant to be run within an existing stack and provide access to a remote SoftEther VPN server. It currently supports connecting to a pre-defined location with user/password credentials and auto-connect to that site on startup.
 
 ## Run
 
