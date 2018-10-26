@@ -53,6 +53,11 @@ if [ "$1" = 'supervisord' ]; then
     /PASSWORD:${SE_PASSWORD} \
     /TYPE:${SE_TYPE} > /dev/null 2>&1
 
+  # set account to auto-connect
+  vpncmd localhost \
+    /CLIENT \
+    /CMD AccountStartupSet ${SE_ACCOUNT_NAME} > /dev/null 2>&1
+
   vpnclient stop
 fi
 
