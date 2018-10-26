@@ -40,7 +40,6 @@ RUN set -ex ; \
     apk --update --no-cache add \
       libcap libcrypto1.0 libssl1.0 ncurses-libs readline supervisor dhclient ; \
     chmod +x /entrypoint.sh \
-      /vpnclient_config.sh \
       /etc/dhclient-enter-hooks \
       /etc/dhclient-exit-hooks
 
