@@ -34,7 +34,6 @@ ENV SE_NICNAME=vpn
 COPY assets/entrypoint.sh /entrypoint.sh
 COPY assets/supervisord.conf /etc/
 COPY assets/dhclient-enter-hooks /etc/dhclient-enter-hooks
-COPY assets/dhclient-exit-hooks /etc/dhclient-exit-hooks
 
 RUN set -ex ; \
     apk --update --no-cache add \
