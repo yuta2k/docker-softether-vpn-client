@@ -22,7 +22,6 @@ docker run --name=docker-softether-vpn-client \
 ### Compose file
 
 ```yaml
-docker-compose
 version: "3"
 
 services:
@@ -46,7 +45,6 @@ services:
 This example stack spins up an [Apache Guacamole](https://github.com/oznu/docker-guacamole) (HTML5 RDP/VNC/... client) instance and connects to a defined VPN. Only the Guacamole web interface has to be exposed to the outside world, every resource reachable within the VPN will only be accessible from within the app and the VPN container, no interface exposed on the host system.
 
 ```yaml
-docker-compose
 version: "3"
 
 services:
@@ -62,8 +60,8 @@ services:
       - SE_USERNAME=vpnuser
       - SE_PASSWORD=Sup3rS3cr3t
     restart: always
-	  # important: this container owns the network stack 
-	  #            so expose guacamole ports here
+    # important: this container owns the network stack 
+    #            so expose guacamole ports here
     ports:
       - "8080:8080"
 
