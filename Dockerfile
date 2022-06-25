@@ -1,4 +1,4 @@
-FROM alpine:3.8 as builder
+FROM alpine:3.14 as builder
 LABEL maintainer="Antoine Mary <antoinee.mary@gmail.com>" \
       contributor="Dimitri G. <dev@dmgnx.net>"
 
@@ -8,7 +8,7 @@ ENV LANG="en_US.UTF-8"
 ### SETUP
 RUN set -ex ; \
     apk add --no-cache --update --virtual .build-deps \
-      gcc g++ make musl-dev ncurses-dev openssl-dev readline-dev cmake git ; \
+      gcc g++ make musl-dev ncurses-dev openssl-dev readline-dev cmake git zlib-dev ; \
     # Fetch sources
     git clone https://github.com/SoftEtherVPN/SoftEtherVPN_Stable.git ; \
     cd SoftEtherVPN_Stable ; \
@@ -18,7 +18,7 @@ RUN set -ex ; \
     make ; make install ; make clean ; 
 
 
-FROM alpine:3.8
+FROM alpine:3.14
 
 # Adjust at runtime
 #ENV SE_SERVER
@@ -37,7 +37,7 @@ COPY assets/dhclient-enter-hooks /etc/dhclient-enter-hooks
 
 RUN set -ex ; \
     apk --update --no-cache add \
-      libcap libcrypto1.0 libssl1.0 ncurses-libs readline supervisor dhclient ; \
+      libcap libcrypto1.1 libssl1.1 ncurses-libs readline supervisor dhclient ; \
     chmod +x /entrypoint.sh \
       /etc/dhclient-enter-hooks
 
