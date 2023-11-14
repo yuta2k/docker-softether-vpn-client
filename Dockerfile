@@ -1,4 +1,4 @@
-FROM alpine:3.14 as builder
+FROM alpine:3.18 as builder
 LABEL maintainer="Antoine Mary <antoinee.mary@gmail.com>" \
       contributor="Dimitri G. <dev@dmgnx.net>"
 
@@ -15,10 +15,10 @@ RUN set -ex ; \
     git submodule init && git submodule update ; \
     # Compile and Install
     ./configure ; \
-    make ; make install ; make clean ; 
+    make ; make install ; make clean ;
 
 
-FROM alpine:3.14
+FROM alpine:3.18
 
 # Adjust at runtime
 #ENV SE_SERVER
@@ -48,4 +48,3 @@ COPY --from=builder /usr/bin/vpncmd /usr/bin/vpncmd
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
-
